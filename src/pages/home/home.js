@@ -29,6 +29,9 @@ class App extends React.Component {
 		// const sReq = '/tasks/' + oUser.username;
 
 		this.oCrudFacade.getTasksForUser(oUser.username, (tasks) => {
+			if (!Array.isArray(tasks)) {
+				return;
+			}
 			tasks.sort((a, b) => a.date_starts > b.date_starts);
 			if (tasks.length === 0) {
 				tasks.push({ title: '', description: '', date_starts: null });
